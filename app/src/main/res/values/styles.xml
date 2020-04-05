@@ -1,0 +1,29 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <dimen name="menu_icon_margin_left">0sp</dimen>
+    <dimen name="menu_bar_text">12sp</dimen>
+    <dimen name="main_menu_button_m_top">25dp</dimen>
+    <dimen name="margin_top_menu">22dp</dimen>
+
+    <dimen name="textViewNormal">12.5sp</dimen>
+    <dimen name="paddingInput">19dp</dimen>
+    <dimen name="margin_between">25dp</dimen>
+
+    <dimen name="margin_between_help_topup">-5dp</dimen>
+    <dimen name="line_help_topup">65dp</dimen>
+
+    <!-- edit text -->
+    <dimen name="edit_text_padding_bottom">22dp</dimen>
+    <dimen name="margin_between_label_to_input">16dp</dimen>
+    <dimen name="splash_button_padding">9dp</dimen>
+
+</resources>

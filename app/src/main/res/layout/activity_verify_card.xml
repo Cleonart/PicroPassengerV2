@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_marginLeft="30dp"
+    android:layout_marginRight="30dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginRight="20dp">
+
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/ic_arrow_left"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="20dp"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Masukan kode kartu yang anda miliki untuk melanjutkan"
+            android:fontFamily="@font/gilroybold"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/dark"
+            android:textSize="21sp"
+            android:lineSpacingExtra="8sp"/>
+
+        <!-- 6 digit kode otentikasi -->
+        <TextView
+            android:fontFamily="@font/gilroybold"
+            android:layout_marginTop="@dimen/margin_between"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_between_label_to_input"
+            android:text="KODE KARTU"/>
+
+        <EditText
+            android:fontFamily="@font/gilroybold"
+            android:id="@+id/sign_in_auth_code"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:hint="Ex. C923"
+            android:background="@null"
+            android:maxLength="6"
+            android:paddingBottom="@dimen/edit_text_padding_bottom"
+            android:inputType="numberPassword"
+            android:textSize="30sp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginBottom="10dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent">
+
+        <Button
+            android:paddingTop="@dimen/splash_button_padding"
+            android:paddingBottom="@dimen/splash_button_padding"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/splashSignIn"
+            android:textColor="#FFF"
+            android:background="@drawable/rounded_menu_2"
+            android:layout_marginBottom="10dp"
+            android:text="LANJUT"
+            app:fontFamily="@font/gilroybold"
+            android:textSize="15sp"/>
+
+        <Button
+            android:paddingTop="@dimen/splash_button_padding"
+            android:paddingBottom="@dimen/splash_button_padding"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/splashRegisterNewCardButton"
+            android:textColor="@color/colorPrimary"
+            android:background="@drawable/outline_button"
+            android:layout_marginBottom="15dp"
+            android:text="SAYA BELUM PUNYA KARTU"
+            app:fontFamily="@font/gilroybold"
+            android:textSize="15sp"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
