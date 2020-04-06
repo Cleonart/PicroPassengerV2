@@ -8,4 +8,6 @@ class JsonObjectSignInToken {
     // pica uid object
     var token: String? = null
 
+    var msg : String? = null
+
 }

@@ -9,7 +9,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.functions.FirebaseFunctions
 import com.google.firebase.functions.HttpsCallableResult
 
-class CloudFunctions{
+object CloudFunctions{
 
     lateinit var auth: FirebaseAuth
 

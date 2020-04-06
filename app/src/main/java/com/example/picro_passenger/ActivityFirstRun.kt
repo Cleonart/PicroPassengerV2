@@ -12,8 +12,6 @@ import com.google.firebase.auth.FirebaseUser
 
 class ActivityFirstRun : AppCompatActivity() {
 
-    val cloud = CloudFunctions()
-
     override fun onStart() {
         super.onStart()
         supportActionBar!!.hide()
@@ -36,7 +34,7 @@ class ActivityFirstRun : AppCompatActivity() {
 
     // validate user credential
     fun validateUserCredential(): Boolean {
-        if(cloud.ValidateUserSignInToken() == null){
+        if(CloudFunctions.ValidateUserSignInToken() == null){
             return false
         }
         return true
