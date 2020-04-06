@@ -10,10 +10,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.picro_passenger.R
 import com.example.picro_passenger.activities.ActivityMain
 import com.example.picro_passenger.support.HashUtils
-import com.example.picro_passenger.support.JsonObjectSignInToken
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.functions.FirebaseFunctions
 import com.google.gson.Gson
+import com.example.picro_passenger.support.JsonObjectSignInToken
 
 class ActivitySignIn : AppCompatActivity(){
 
@@ -25,6 +25,7 @@ class ActivitySignIn : AppCompatActivity(){
     lateinit var signInAuthCode : EditText
     lateinit var showAuth : CheckBox
     lateinit var signInButton : Button
+    lateinit var backButton : ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +36,7 @@ class ActivitySignIn : AppCompatActivity(){
         signInAuthCode = findViewById(R.id.sign_in_auth_code)
         showAuth       = findViewById(R.id.show_auth)
         signInButton   = findViewById(R.id.sign_in_button)
+        backButton     = findViewById(R.id.back_button)
 
         // menampilkan dan memunculkan password
         showAuth.setOnCheckedChangeListener { compoundButton, checkBox ->
@@ -58,7 +60,6 @@ class ActivitySignIn : AppCompatActivity(){
         }
 
         // tombol kembali
-        val backButton : ImageView = findViewById(R.id.back_button)
         backButton.setOnClickListener{
             finish()
         }
@@ -100,7 +101,8 @@ class ActivitySignIn : AppCompatActivity(){
     private fun signIn(username: String, password: String) {
 
         // gabungkan username dan password -> hash setelahnya
-        val handshake_token = (username + password)
+        val handshake_token = (HashUtils.sha1(username + "" + password)).toLowerCase()
+        Log.i("FirebaseSignIn", "Token : " +  handshake_token)
 
         // dirubah menjadi object
         val data = hashMapOf("handshake_token" to handshake_token)
@@ -119,17 +121,19 @@ class ActivitySignIn : AppCompatActivity(){
             }
             .addOnSuccessListener {
                 Log.i("FirebaseSignIn", it.data.toString())
-                val gson = Gson()
-                val response = gson.fromJson(it.data.toString(), JsonObjectSignInToken::class.java)
+                val respon = Gson().toJson(it.data)
+                val response = Gson().fromJson(respon.toString(), JsonObjectSignInToken::class.java)
 
                 val token_status = response.status.toString()
                 customToken = response.token.toString()
+                Log.i("FirebaseSignIn", customToken.toString())
+                Log.i("FirebaseSignIn", token_status)
 
                 // ERRROR : username dan password tidak cocok
                 if(token_status == "USERNAME_AND_PASSWORD_NOT_MATCH"){
-                    //signInUsername.error = "Username salah"
-                    //signInUsername.requestFocus()
-                    //signInAuthCode.error = "Kode otentikasi salah"
+                    signInUsername.error = "Username tidak ditemukan"
+                    signInUsername.requestFocus()
+                    signInAuthCode.error = "Kode otentikasi salah"
                 }
 
                 // SUCCESS : jika username dan password cocok
@@ -167,6 +171,7 @@ class ActivitySignIn : AppCompatActivity(){
                             }
                     }
                 }
+
             }
     }
 
