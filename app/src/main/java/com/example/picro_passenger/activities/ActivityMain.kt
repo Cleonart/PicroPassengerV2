@@ -16,12 +16,15 @@ class ActivityMain : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activities_main)
+
         signOutButton = findViewById(R.id.SignOut)
+
+        if(CloudFunctions.ValidateUserSignInToken()){
+
+        }
 
         Log.i("FirebaseSignIn", "Verify token")
         Log.i("FirebaseSignIn", CloudFunctions.ValidateUserSignInToken().toString())
-
-
 
         signOutButton.setOnClickListener {
             CloudFunctions.SignOut()
@@ -29,5 +32,6 @@ class ActivityMain : AppCompatActivity(){
             finish()
             startActivity(intent_to)
         }
+
     }
 }

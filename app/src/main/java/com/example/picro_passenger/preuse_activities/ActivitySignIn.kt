@@ -15,11 +15,16 @@ import com.google.firebase.functions.FirebaseFunctions
 import com.google.gson.Gson
 import com.example.picro_passenger.support.JsonObjectSignInToken
 
+// passed 5 of 5 tests
+// module on 85%
 class ActivitySignIn : AppCompatActivity(){
 
     lateinit var functions: FirebaseFunctions
     lateinit var auth: FirebaseAuth
-    private var customToken: String? = null
+
+    // data token
+    var customToken: String? = null
+    var statusToken: String? = null
 
     lateinit var signInUsername : EditText
     lateinit var signInAuthCode : EditText
@@ -48,7 +53,7 @@ class ActivitySignIn : AppCompatActivity(){
             }
         }
 
-        // sign in button
+        // tombol masuk
         signInButton.setOnClickListener{
             val username = signInUsername.text.toString()
             val password = signInAuthCode.text.toString()
@@ -126,8 +131,10 @@ class ActivitySignIn : AppCompatActivity(){
 
                 val token_status = response.status.toString()
                 customToken = response.token.toString()
+                statusToken = token_status
+
                 Log.i("FirebaseSignIn", customToken.toString())
-                Log.i("FirebaseSignIn", token_status)
+                Log.i("FirebaseSignIn", statusToken.toString())
 
                 // ERRROR : username dan password tidak cocok
                 if(token_status == "USERNAME_AND_PASSWORD_NOT_MATCH"){

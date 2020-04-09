@@ -22,10 +22,21 @@
         <activity android:name=".stored_data_controller.StoredDataHandler" />
         <activity android:name=".MainActivity" />
         <activity android:name=".ActivitySplash" />
-        <activity android:name=".activities.ActivityMain" />
+        <activity android:name=".activities.ActivityMain">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".preuse_activities.ActivitySignIn" />
         <activity android:name=".preuse_activities.ActivitySignUp" />
         <activity android:name=".support.SupportVerifyCard" />
+        <uses-library android:name="android.test.runner"
+            android:required="false" />
+        <uses-library android:name="android.test.base"
+            android:required="false" />
+        <uses-library android:name="android.test.mock"
+            android:required="false" />
     </application>
 
 </manifest>

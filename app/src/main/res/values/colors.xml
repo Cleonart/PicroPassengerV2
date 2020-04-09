@@ -18,4 +18,8 @@
     <color name="turqoise">#1abc9c</color>
     <color name="midnight_blue">#2c3e50</color>
     <color name="dark">#000</color>
+
+
+    <color name="ligt_purple">#dad4fc</color>
+    <color name="ligt_yellow">#fdf7e7</color>
 </resources>

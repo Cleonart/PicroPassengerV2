@@ -1,37 +1,38 @@
 package com.example.picro_passenger
 
 import android.content.Intent
+import android.os.Bundle
+import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import com.example.picro_passenger.activities.ActivityMain
 import com.example.picro_passenger.cloud_functions.CloudFunctions
+
 class ActivityFirstRun : AppCompatActivity() {
 
-    override fun onStart() {
-        super.onStart()
+    lateinit var intentControl : Intent
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_first_run)
         supportActionBar!!.hide()
+        val r = Runnable {
 
-        // go to main menu
-        if(validateUserCredential()){
-            val intent_to = Intent(this,ActivityMain::class.java)
+            // pergi ke menu utama
+            if(CloudFunctions.ValidateUserSignInToken()){
+                intentControl = Intent(this,ActivityMain::class.java)
+            }
+
+            // pergi ke menu splash
+            else{
+                intentControl = Intent(this,ActivitySplash::class.java)
+            }
             finish()
-            startActivity(intent_to)
+            startActivity(intentControl)
         }
 
-        // go to splash page
-        else{
-            val intent_to = Intent(this,ActivitySplash::class.java)
-            finish()
-            startActivity(intent_to)
-        }
+        Handler().postDelayed(r, 400)
 
-    }
-
-    // validate user credential
-    fun validateUserCredential(): Boolean {
-        if(CloudFunctions.ValidateUserSignInToken() == null){
-            return false
-        }
-        return true
     }
 
 }
+

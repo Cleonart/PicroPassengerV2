@@ -24,9 +24,9 @@ object CloudFunctions{
     }
 
     // validate token
-    fun ValidateUserSignInToken() : FirebaseUser?{
+    fun ValidateUserSignInToken() : Boolean{
         auth = FirebaseAuth.getInstance()
-        val currentUser = auth.currentUser
-        return currentUser
+        val currentUser = auth.currentUser ?: return false
+        return true
     }
 }
