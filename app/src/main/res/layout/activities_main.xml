@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
+
  <ScrollView
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="false"
+    tools:context=".activities.ActivityMain"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:context=".MainActivity"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp">
 
@@ -27,7 +30,7 @@
                 android:fontFamily="@font/gilroybold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hello!"
+                android:text="@string/activity_main_welcome_greet"
                 android:textColor="@color/dark"
                 android:textSize="28sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -39,11 +42,11 @@
                 android:fontFamily="@font/gilroyregular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cleonart Dotulong"
+                android:text="@string/activity_main_user_name"
                 android:alpha="0.7"
                 android:textColor="@color/dark"
                 android:textSize="18sp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -51,84 +54,31 @@
 
         </LinearLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_marginTop="30dp"
+        <!-- card -->
+        <include
+            layout="@layout/activities_main_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!-- feature bar -->
+        <include
+            layout="@layout/activities_main_feature"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/activity_main_header">
+            android:layout_marginTop="30dp"/>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/top_up_button"
-                android:layout_width="0dp"
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom">
+
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintWidth_percent="0.25"
-                app:layout_constraintLeft_toLeftOf="parent">
+                android:text="Data"/>
 
-                <ImageView
-                    android:id="@+id/main_feature_button_top"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/ic_top_up_icon"
-                    android:background="@drawable/main_feature_menu_background_purple"
-                    android:paddingTop="15dp"
-                    android:paddingBottom="15dp"
-                    android:paddingRight="4dp"
-                    app:layout_constraintWidth_percent="0.7"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"/>
+        </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/main_feature_button_bottom"
-                    android:fontFamily="@font/gilroybold"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Top Up"
-                    android:layout_marginTop="10dp"
-                    android:textAlignment="center"
-                    android:textColor="@color/dark"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/main_feature_button_top"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/transfer_button"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintWidth_percent="0.25"
-                app:layout_constraintLeft_toRightOf="@id/top_up_button">
-
-                <ImageView
-                    android:id="@+id/main_feature_button_top"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/ic_transfer_icon"
-                    android:background="@drawable/main_feature_menu_background_yellow"
-                    android:paddingTop="15dp"
-                    android:paddingBottom="15dp"
-                    android:paddingRight="4dp"
-                    app:layout_constraintWidth_percent="0.7"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"/>
-
-                <TextView
-                    android:id="@+id/main_feature_button_bottom"
-                    android:fontFamily="@font/gilroybold"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Kirim"
-                    android:layout_marginTop="10dp"
-                    android:textAlignment="center"
-                    android:textColor="@color/dark"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/main_feature_button_top"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </ScrollView>

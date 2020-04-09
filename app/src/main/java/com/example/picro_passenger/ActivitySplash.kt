@@ -14,12 +14,15 @@ import com.google.firebase.functions.FirebaseFunctions
 
 class ActivitySplash : AppCompatActivity(){
 
+    lateinit var intentControl : Intent
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         supportActionBar!!.hide()
 
-        var intentControl = Intent()
+        intentControl = Intent()
+
         val splashSignIn = findViewById<Button>(R.id.splashSignIn)
         val splashSignUp = findViewById<Button>(R.id.splashSignUp)
         val splashRegisterNewCard = findViewById<Button>(R.id.splashRegisterNewCardButton)

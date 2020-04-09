@@ -44,7 +44,7 @@ class ActivitySignIn : AppCompatActivity(){
         backButton     = findViewById(R.id.back_button)
 
         // menampilkan dan memunculkan password
-        showAuth.setOnCheckedChangeListener { compoundButton, checkBox ->
+        showAuth.setOnCheckedChangeListener { _, checkBox ->
             if (checkBox) {
                 signInAuthCode.transformationMethod = HideReturnsTransformationMethod.getInstance()
             }
@@ -74,22 +74,16 @@ class ActivitySignIn : AppCompatActivity(){
     // passed test
     fun validatingInput(username: String = "", password: String = ""): Boolean {
 
-        // ERROR : kotak username harus diisi
-        if(username == ""){
+        if(username == "") {
             signInUsername.error = "Kotak username harus diisi"
             signInUsername.requestFocus()
         }
 
-        // ERRROR : kotak kode otentikasi harus diisi
-        if(password == ""){
-            signInAuthCode.error = "Kode otentikasi harus diisi"
-        }
+        if(password == ""){ signInAuthCode.error = "Kode otentikasi harus diisi" }
 
         // SUCCESS : jika username dan password telah memenuhi
         if(!(username == "" && password == "")){
-
             val password_int = password.toInt()
-
             // validasi benar jika jumlah password adalah 6 digit
             if(password_int >= 100000){
                 return true
@@ -97,7 +91,7 @@ class ActivitySignIn : AppCompatActivity(){
 
             // ERROR: kode otentikasi harus 6 digit
             signInAuthCode.error = "Kode otentikasi harus 6 digit"
-
+            signInAuthCode.requestFocus()
         }
 
         return false
@@ -152,10 +146,9 @@ class ActivitySignIn : AppCompatActivity(){
                                 // jika token terautentikasi dengan benar
                                 if (Task.isSuccessful) {
                                     Log.d("FirebaseSignIn", "signInWithCustomToken:success")
-                                    val user = auth.currentUser
-                                    val intent_to = Intent(this, ActivityMain::class.java)
+                                    val intentTo = Intent(this, ActivityMain::class.java)
                                     finish()
-                                    startActivity(intent_to)
+                                    startActivity(intentTo)
                                 }
 
                                 // jika token bermasalah

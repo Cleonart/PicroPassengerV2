@@ -16,7 +16,7 @@ class ActivityMain : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activities_main)
-
+        /*
         signOutButton = findViewById(R.id.SignOut)
 
         if(CloudFunctions.ValidateUserSignInToken()){
@@ -31,7 +31,7 @@ class ActivityMain : AppCompatActivity(){
             val intent_to = Intent(this, ActivitySplash::class.java)
             finish()
             startActivity(intent_to)
-        }
+        }*/
 
     }
 }
