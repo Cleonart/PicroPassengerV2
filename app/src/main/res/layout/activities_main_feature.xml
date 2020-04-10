@@ -18,87 +18,176 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="5dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/top_up_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintWidth_percent="0.25"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-        <ImageView
-            android:id="@+id/main_feature_button_top"
+        <!-- top up button -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/top_up_button"
             android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:src="@drawable/ic_top_up_icon"
-            android:background="@drawable/main_feature_menu_background_purple"
-            android:paddingTop="@dimen/activity_main_feature_icon_padding_top"
-            android:paddingBottom="@dimen/activity_main_feature_icon_padding_bottom"
-            android:paddingRight="@dimen/activity_main_feature_icon_padding_right"
-            android:paddingEnd="@dimen/activity_main_feature_icon_padding_right"
-            android:contentDescription="@string/activity_main_feature_icon_top_up_content_desc"
-            app:layout_constraintWidth_percent="0.7"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="RtlSymmetry" />
-        <TextView
-            android:id="@+id/main_feature_button_bottom"
-            android:fontFamily="@font/gilroybold"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/activity_main_feature_icon_top_up_content_desc"
-            android:layout_marginTop="@dimen/activity_main_feature_icon_title_text_margin"
-            android:textAlignment="center"
-            android:textSize="@dimen/activity_main_feature_icon_title_text_size"
-            android:textColor="@color/dark"
-            android:gravity="center_horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/main_feature_button_top" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/transfer_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintWidth_percent="0.25"
-        app:layout_constraintLeft_toRightOf="@id/top_up_button"
-        app:layout_constraintTop_toTopOf="parent">
-        <ImageView
-            android:id="@+id/main_feature_button_top_2"
+            android:orientation="vertical"
+            app:layout_constraintWidth_percent="0.19"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:id="@+id/main_feature_button_top"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:src="@drawable/top_up_icon"
+                android:contentDescription="@string/activity_main_feature_icon_top_up_content_desc"
+                app:layout_constraintWidth_percent="1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+            <TextView
+                android:id="@+id/main_feature_button_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_main_feature_icon_title_text_margin"
+                android:fontFamily="@font/gilroybold"
+                android:gravity="center_horizontal"
+                android:text="@string/activity_main_feature_icon_top_up_content_desc"
+                android:textAlignment="center"
+                android:textColor="@color/dark"
+                android:textSize="@dimen/activity_main_feature_icon_title_text_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/main_feature_button_top"
+                app:layout_constraintVertical_bias="0.0"
+                tools:layout_editor_absoluteX="0dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:id="@+id/activity_margin_1"
             android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:src="@drawable/ic_transfer_icon"
-            android:background="@drawable/main_feature_menu_background_yellow"
-            android:paddingTop="@dimen/activity_main_feature_icon_padding_top"
-            android:paddingBottom="@dimen/activity_main_feature_icon_padding_bottom"
-            android:paddingRight="@dimen/activity_main_feature_icon_padding_right"
-            android:paddingEnd="@dimen/activity_main_feature_icon_padding_right"
-            android:contentDescription="@string/activity_main_feature_icon_transfer_content_desc"
-            app:layout_constraintWidth_percent="0.7"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="RtlSymmetry" />
-        <TextView
-            android:id="@+id/main_feature_button_bottom_2"
-            android:fontFamily="@font/gilroybold"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/activity_main_feature_icon_transfer_content_desc"
-            android:layout_marginTop="@dimen/activity_main_feature_icon_title_text_margin"
-            android:textAlignment="center"
-            android:textSize="@dimen/activity_main_feature_icon_title_text_size"
-            android:textColor="@color/dark"
-            android:gravity="center_horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/main_feature_button_top_2" />
+            app:layout_constraintWidth_percent="0.08"
+            app:layout_constraintLeft_toRightOf="@id/top_up_button"
+            app:layout_constraintTop_toTopOf="parent"
+            android:orientation="horizontal"/>
+
+        <!-- transfer button -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/transfer_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintWidth_percent="0.19"
+            app:layout_constraintLeft_toRightOf="@id/activity_margin_1"
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:id="@+id/main_feature_button_top_2"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:src="@drawable/transfer_icon"
+                android:contentDescription="@string/activity_main_feature_icon_transfer_content_desc"
+                app:layout_constraintWidth_percent="1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+            <TextView
+                android:id="@+id/main_feature_button_bottom_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_main_feature_icon_title_text_margin"
+                android:fontFamily="@font/gilroybold"
+                android:gravity="center_horizontal"
+                android:text="@string/activity_main_feature_icon_transfer_content_desc"
+                android:textAlignment="center"
+                android:textColor="@color/dark"
+                android:textSize="@dimen/activity_main_feature_icon_title_text_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/main_feature_button_top_2"
+                app:layout_constraintVertical_bias="0.0"
+                tools:layout_editor_absoluteX="0dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:id="@+id/activity_margin_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintWidth_percent="0.08"
+            app:layout_constraintLeft_toRightOf="@id/transfer_button"
+            app:layout_constraintTop_toTopOf="parent"
+            android:orientation="horizontal"/>
+
+        <!-- health button -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/health_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintWidth_percent="0.19"
+            app:layout_constraintLeft_toRightOf="@id/activity_margin_2"
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:id="@+id/main_feature_button_top_3"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:src="@drawable/health"
+                android:contentDescription="@string/activity_main_feature_icon_top_up_content_desc"
+                app:layout_constraintWidth_percent="1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+            <TextView
+                android:id="@+id/main_feature_button_bottom_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_main_feature_icon_title_text_margin"
+                android:fontFamily="@font/gilroybold"
+                android:gravity="center_horizontal"
+                android:text="@string/activity_main_feature_icon_health_content_desc"
+                android:textAlignment="center"
+                android:textColor="@color/dark"
+                android:textSize="@dimen/activity_main_feature_icon_title_text_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/main_feature_button_top_3"
+                app:layout_constraintVertical_bias="0.0"
+                tools:layout_editor_absoluteX="0dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:id="@+id/activity_margin_3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintWidth_percent="0.08"
+            app:layout_constraintLeft_toRightOf="@id/health_button"
+            app:layout_constraintTop_toTopOf="parent"
+            android:orientation="horizontal"/>
+
+        <!-- voucher button -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/voucher_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintWidth_percent="0.19"
+            app:layout_constraintLeft_toRightOf="@id/activity_margin_3"
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:id="@+id/main_feature_button_top_4"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:src="@drawable/voucher_icon"
+                android:contentDescription="@string/activity_main_feature_icon_top_up_content_desc"
+                app:layout_constraintWidth_percent="1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+            <TextView
+                android:id="@+id/main_feature_button_bottom_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_main_feature_icon_title_text_margin"
+                android:fontFamily="@font/gilroybold"
+                android:gravity="center_horizontal"
+                android:text="@string/activity_main_feature_icon_voucher_content_desc"
+                android:textAlignment="center"
+                android:textColor="@color/dark"
+                android:textSize="@dimen/activity_main_feature_icon_title_text_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/main_feature_button_top_4"
+                app:layout_constraintVertical_bias="0.0"
+                tools:layout_editor_absoluteX="0dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

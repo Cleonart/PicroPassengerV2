@@ -3,18 +3,17 @@
 
     <!-- activities_main_header -->
     <string name="activity_main_welcome_greet">Hello!</string>
-    <string name="activity_main_user_name">John Doe</string>
+    <string name="activity_main_user_name">Evelyn Kennedy</string>
 
     <!-- activities_main_feature -->
-    <dimen name="activity_main_feature_icon_padding_top">15dp</dimen>
-    <dimen name="activity_main_feature_icon_padding_bottom">15dp</dimen>
-    <dimen name="activity_main_feature_icon_padding_right">4dp</dimen>
-    <dimen name="activity_main_feature_icon_title_text_size">14sp</dimen>
-    <dimen name="activity_main_feature_icon_title_text_margin">14sp</dimen>
+    <dimen name="activity_main_feature_icon_title_text_size">13sp</dimen>
+    <dimen name="activity_main_feature_icon_title_text_margin">1dp</dimen>
     <dimen name="activity_main_feature_icon_title_size">20sp</dimen>
 
     <string name="activity_main_feature_icon_top_up_content_desc">Top Up</string>
     <string name="activity_main_feature_icon_transfer_content_desc">Transfer</string>
+    <string name="activity_main_feature_icon_health_content_desc">Kesehatan</string>
+    <string name="activity_main_feature_icon_voucher_content_desc">Voucher</string>
     <string name="activity_main_feature_title">Layanan</string>
 
 </resources>

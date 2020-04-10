@@ -16,6 +16,8 @@ class ActivityMain : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activities_main)
+        supportActionBar!!.hide()
+
         /*
         signOutButton = findViewById(R.id.SignOut)
 
