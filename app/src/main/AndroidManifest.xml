@@ -31,6 +31,8 @@
         <activity android:name=".preuse_activities.ActivitySignIn" />
         <activity android:name=".preuse_activities.ActivitySignUp" />
         <activity android:name=".support.SupportVerifyCard" />
+        <activity android:name=".support.LoadingSpinner" />
+
         <uses-library android:name="android.test.runner"
             android:required="false" />
         <uses-library android:name="android.test.base"

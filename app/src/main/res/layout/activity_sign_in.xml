@@ -115,11 +115,7 @@
         android:background="@drawable/rounded_menu_2"
         android:fontFamily="@font/gilroybold"/>
 
-    <LinearLayout
-        android:id="@+id/progressbar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-    </LinearLayout>
+    <include
+        layout="@layout/_general_loading_anim"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

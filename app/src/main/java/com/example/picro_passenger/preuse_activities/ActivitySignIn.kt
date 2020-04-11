@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.util.Log
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.picro_passenger.R
 import com.example.picro_passenger.activities.ActivityMain
 import com.example.picro_passenger.support.HashUtils
@@ -31,6 +33,7 @@ class ActivitySignIn : AppCompatActivity(){
     lateinit var showAuth : CheckBox
     lateinit var signInButton : Button
     lateinit var backButton : ImageView
+    lateinit var spinner : ConstraintLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +45,8 @@ class ActivitySignIn : AppCompatActivity(){
         showAuth       = findViewById(R.id.show_auth)
         signInButton   = findViewById(R.id.sign_in_button)
         backButton     = findViewById(R.id.back_button)
+        spinner        = findViewById(R.id.loading_spinner)
+        spinner.visibility = View.GONE
 
         // menampilkan dan memunculkan password
         showAuth.setOnCheckedChangeListener { _, checkBox ->
@@ -109,6 +114,7 @@ class ActivitySignIn : AppCompatActivity(){
         // inisialisasi fungsi firebase
         functions = FirebaseFunctions.getInstance()
         auth      = FirebaseAuth.getInstance()
+        spinner.visibility = View.VISIBLE
 
         // fungsi untuk melakukan sign in
         functions
@@ -132,6 +138,7 @@ class ActivitySignIn : AppCompatActivity(){
 
                 // ERRROR : username dan password tidak cocok
                 if(token_status == "USERNAME_AND_PASSWORD_NOT_MATCH"){
+                    spinner.visibility = View.GONE
                     signInUsername.error = "Username tidak ditemukan"
                     signInUsername.requestFocus()
                     signInAuthCode.error = "Kode otentikasi salah"
