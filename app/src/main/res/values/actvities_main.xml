@@ -8,7 +8,7 @@
     <!-- activities_main_feature -->
     <dimen name="activity_main_feature_icon_title_text_size">13sp</dimen>
     <dimen name="activity_main_feature_icon_title_text_margin">1dp</dimen>
-    <dimen name="activity_main_feature_icon_title_size">20sp</dimen>
+    <dimen name="activity_main_feature_icon_title_size">18sp</dimen>
 
     <string name="activity_main_feature_icon_top_up_content_desc">Top Up</string>
     <string name="activity_main_feature_icon_transfer_content_desc">Transfer</string>

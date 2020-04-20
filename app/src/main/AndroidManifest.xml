@@ -2,17 +2,20 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.picro_passenger">
 
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:hardwareAccelerated="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:screenOrientation="portrait" >
         <!-- START -->
-        <activity android:name=".ActivityFirstRun">
+        <activity android:name=".ActivityFirstRun" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -32,6 +35,8 @@
         <activity android:name=".preuse_activities.ActivitySignUp" />
         <activity android:name=".support.SupportVerifyCard" />
         <activity android:name=".support.LoadingSpinner" />
+        <activity android:name=".activities.ActivityUserAccount" />
+        <activity android:name=".payment_controller.ActivityScanner" />
 
         <uses-library android:name="android.test.runner"
             android:required="false" />

@@ -18,7 +18,7 @@ import com.google.gson.Gson
 import com.example.picro_passenger.support.JsonObjectSignInToken
 
 // passed 5 of 5 tests
-// module on 85%
+// module on 95%
 class ActivitySignIn : AppCompatActivity(){
 
     lateinit var functions: FirebaseFunctions
@@ -46,16 +46,12 @@ class ActivitySignIn : AppCompatActivity(){
         signInButton   = findViewById(R.id.sign_in_button)
         backButton     = findViewById(R.id.back_button)
         spinner        = findViewById(R.id.loading_spinner)
-        spinner.visibility = View.GONE
+        spinner.visibility = View.GONE // hide the spinner
 
         // menampilkan dan memunculkan password
         showAuth.setOnCheckedChangeListener { _, checkBox ->
-            if (checkBox) {
-                signInAuthCode.transformationMethod = HideReturnsTransformationMethod.getInstance()
-            }
-            else {
-                signInAuthCode.transformationMethod = PasswordTransformationMethod.getInstance()
-            }
+            if (checkBox) { signInAuthCode.transformationMethod = HideReturnsTransformationMethod.getInstance() }
+            else { signInAuthCode.transformationMethod = PasswordTransformationMethod.getInstance() }
         }
 
         // tombol masuk
@@ -65,6 +61,7 @@ class ActivitySignIn : AppCompatActivity(){
 
             // jika validasi benar
             if(validatingInput(username, password)){
+                spinner.visibility = View.VISIBLE
                 signIn(username,password)
             }
         }
@@ -84,7 +81,9 @@ class ActivitySignIn : AppCompatActivity(){
             signInUsername.requestFocus()
         }
 
-        if(password == ""){ signInAuthCode.error = "Kode otentikasi harus diisi" }
+        if(password == ""){
+            signInAuthCode.error = "Kode otentikasi harus diisi"
+        }
 
         // SUCCESS : jika username dan password telah memenuhi
         if(!(username == "" && password == "")){
@@ -106,7 +105,7 @@ class ActivitySignIn : AppCompatActivity(){
 
         // gabungkan username dan password -> hash setelahnya
         val handshake_token = (HashUtils.sha1(username + "" + password)).toLowerCase()
-        Log.i("FirebaseSignIn", "Token : " +  handshake_token)
+        Log.i("FirebaseSignIn", "Token : $handshake_token")
 
         // dirubah menjadi object
         val data = hashMapOf("handshake_token" to handshake_token)
@@ -114,7 +113,6 @@ class ActivitySignIn : AppCompatActivity(){
         // inisialisasi fungsi firebase
         functions = FirebaseFunctions.getInstance()
         auth      = FirebaseAuth.getInstance()
-        spinner.visibility = View.VISIBLE
 
         // fungsi untuk melakukan sign in
         functions
@@ -126,8 +124,8 @@ class ActivitySignIn : AppCompatActivity(){
             }
             .addOnSuccessListener {
                 Log.i("FirebaseSignIn", it.data.toString())
-                val respon = Gson().toJson(it.data)
-                val response = Gson().fromJson(respon.toString(), JsonObjectSignInToken::class.java)
+                val signInResult = Gson().toJson(it.data).toString()
+                val response = Gson().fromJson(signInResult, JsonObjectSignInToken::class.java)
 
                 val token_status = response.status.toString()
                 customToken = response.token.toString()
@@ -150,6 +148,9 @@ class ActivitySignIn : AppCompatActivity(){
                         auth.signInWithCustomToken(it)
                             .addOnCompleteListener { Task ->
 
+                                // sembunyikan loading jika loading berhasil
+                                spinner.visibility = View.GONE
+
                                 // jika token terautentikasi dengan benar
                                 if (Task.isSuccessful) {
                                     Log.d("FirebaseSignIn", "signInWithCustomToken:success")
@@ -160,16 +161,8 @@ class ActivitySignIn : AppCompatActivity(){
 
                                 // jika token bermasalah
                                 else {
-                                    Log.w(
-                                        "FirebaseSignIn",
-                                        "signInWithCustomToken:failure",
-                                        Task.exception
-                                    )
-                                    Toast.makeText(
-                                        baseContext,
-                                        "Authentication failed.",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
+                                    Log.w("FirebaseSignIn", "signInWithCustomToken:failure", Task.exception)
+                                    Toast.makeText(baseContext, "Authentication failed.", Toast.LENGTH_SHORT).show()
                                 }
                             }
                             .addOnFailureListener {
