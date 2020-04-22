@@ -29,4 +29,12 @@ object CloudFunctions{
         val currentUser = auth.currentUser ?: return false
         return true
     }
+
+    fun GetUserId() : String{
+        auth = FirebaseAuth.getInstance()
+        val currentUser = auth.currentUser
+        val userId = currentUser!!.uid
+        Log.d("USER", userId)
+        return userId
+    }
 }

@@ -1,6 +1,6 @@
 package com.example.picro_passenger.preuse_activities
 
-import android.content.Intent
+
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
@@ -10,7 +10,6 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.picro_passenger.R
-import com.example.picro_passenger.activities.ActivityMain
 import com.example.picro_passenger.support.HashUtils
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.functions.FirebaseFunctions
@@ -154,9 +153,7 @@ class ActivitySignIn : AppCompatActivity(){
                                 // jika token terautentikasi dengan benar
                                 if (Task.isSuccessful) {
                                     Log.d("FirebaseSignIn", "signInWithCustomToken:success")
-                                    val intentTo = Intent(this, ActivityMain::class.java)
                                     finish()
-                                    startActivity(intentTo)
                                 }
 
                                 // jika token bermasalah

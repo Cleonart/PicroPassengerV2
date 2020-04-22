@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.example.picro_passenger.activities.ActivityMain
 import com.example.picro_passenger.cloud_functions.CloudFunctions
 import com.example.picro_passenger.preuse_activities.ActivitySignIn
 import com.example.picro_passenger.support.LoadingSpinner
@@ -29,6 +30,13 @@ class ActivitySplash : AppCompatActivity(){
         val splashSignUp = findViewById<Button>(R.id.splashSignUp)
         val splashRegisterNewCard = findViewById<Button>(R.id.splashRegisterNewCardButton)
 
+        // validate if the user is already signed in
+        if(CloudFunctions.ValidateUserSignInToken()){
+            intentControl = Intent(this, ActivityMain::class.java)
+            finish()
+            startActivity(intentControl)
+        }
+
         splashSignIn.setOnClickListener {
             intentControl = Intent(this, ActivitySignIn::class.java)
             startActivity(intentControl)
@@ -44,5 +52,4 @@ class ActivitySplash : AppCompatActivity(){
             startActivity(intentControl)
         }
     }
-
 }
