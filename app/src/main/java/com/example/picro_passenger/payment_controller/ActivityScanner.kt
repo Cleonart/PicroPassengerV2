@@ -2,18 +2,18 @@ package com.example.picro_passenger.payment_controller
 
 import android.Manifest
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.RelativeLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.airbnb.lottie.LottieAnimationView
 import com.example.picro_passenger.R
 import com.example.picro_passenger.cloud_functions.CloudFunctions
-import com.example.picro_passenger.support.HashUtils
 import com.example.picro_passenger.support.JsonObjectPaymentConfirmation
-import com.example.picro_passenger.support.JsonObjectSignInToken
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.functions.FirebaseFunctions
 import com.google.gson.Gson
 import com.google.zxing.Result
@@ -25,6 +25,7 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
 import me.dm7.barcodescanner.zxing.ZXingScannerView
 
+
 class ActivityScanner : AppCompatActivity(), ZXingScannerView.ResultHandler {
 
     lateinit var functions: FirebaseFunctions
@@ -32,10 +33,20 @@ class ActivityScanner : AppCompatActivity(), ZXingScannerView.ResultHandler {
     lateinit var backButton : RelativeLayout
     lateinit var spinner : ConstraintLayout
 
+    // animation
+    lateinit var confirmation : ConstraintLayout
+    private var animation_view_confirmation : LottieAnimationView? = null
+    lateinit var lottie_animation_text : TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout._general_activity_scanner)
         supportActionBar!!.hide()
+
+        confirmation = findViewById(R.id.confirmation)
+        confirmation.visibility = View.GONE  // hide the confirmation
+        animation_view_confirmation = findViewById<LottieAnimationView>(R.id.animation_view_confirmation)
+        lottie_animation_text = findViewById(R.id.lottie_animation_text)
 
         spinner = findViewById(R.id.loading_spinner)
         spinner.visibility = View.GONE // hide the spinner
@@ -106,18 +117,30 @@ class ActivityScanner : AppCompatActivity(), ZXingScannerView.ResultHandler {
                     val resultData = Gson().toJson(it.data).toString()
                     val response = Gson().fromJson(resultData, JsonObjectPaymentConfirmation::class.java)
                     val errorCode = response.error_code
-                    spinner.visibility = View.GONE // hide the spinner
+                    spinner.visibility = View.GONE            // hide the spinner
+                    confirmation.visibility = View.VISIBLE    // show the confirmation component
                     Log.d("Payment", errorCode.toString())
 
-                    if(errorCode == "RECEIVER_NOT_FOUND"){
-                        Toast.makeText(baseContext, "Kode QR tidak valid", Toast.LENGTH_SHORT).show()
+                    when (errorCode) {
+                        "RECEIVER_NOT_FOUND" -> {
+                            lottie_animation_text.text = "Kode QR tidak valid"
+                            animation_view_confirmation!!.setAnimation(R.raw.loading_spinner)
+                        }
+                        "SENDER_BALANCE_NOT_ENOUGH_FOR_TRANSACTION" -> {
+                            lottie_animation_text.text = "Saldo anda tidak cukup"
+                            //animation_view_confirmation.setAnimation(R.raw.failed)
+                        }
+                        "PAYMENT SUCCESSFULL" -> {
+                            lottie_animation_text.text = "Pembayaran Berhasil"
+                            //animation_view_confirmation.setAnimation(R.raw.success)
+                        }
                     }
-                    else if(errorCode == "SENDER_BALANCE_NOT_ENOUGH_FOR_TRANSACTION"){
-                        Toast.makeText(baseContext, "Saldo anda tidak cukup", Toast.LENGTH_SHORT).show()
-                    }
-                    else if(errorCode == "PAYMENT SUCCESSFULL"){
-                        Toast.makeText(baseContext, "Pembayaran Berhasil", Toast.LENGTH_SHORT).show()
-                    }
+
+                    animation_view_confirmation!!.playAnimation()
+
+                    // delay before going out
+                    //Handler().postDelayed(
+                     //   { Log.i("tag", "This'll run 1000 milliseconds later") },1200)
 
                 }
     }

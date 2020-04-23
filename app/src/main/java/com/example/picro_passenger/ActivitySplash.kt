@@ -30,12 +30,7 @@ class ActivitySplash : AppCompatActivity(){
         val splashSignUp = findViewById<Button>(R.id.splashSignUp)
         val splashRegisterNewCard = findViewById<Button>(R.id.splashRegisterNewCardButton)
 
-        // validate if the user is already signed in
-        if(CloudFunctions.ValidateUserSignInToken()){
-            intentControl = Intent(this, ActivityMain::class.java)
-            finish()
-            startActivity(intentControl)
-        }
+        validateUser()
 
         splashSignIn.setOnClickListener {
             intentControl = Intent(this, ActivitySignIn::class.java)
@@ -49,6 +44,20 @@ class ActivitySplash : AppCompatActivity(){
 
         splashRegisterNewCard.setOnClickListener {
             intentControl = Intent(this, ActivitySignIn::class.java)
+            startActivity(intentControl)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        validateUser()
+    }
+
+    // validate if the user is already signed in
+    private fun validateUser(){
+        if(CloudFunctions.ValidateUserSignInToken()){
+            intentControl = Intent(this, ActivityMain::class.java)
+            finish()
             startActivity(intentControl)
         }
     }

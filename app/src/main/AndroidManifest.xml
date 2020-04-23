@@ -37,6 +37,7 @@
         <activity android:name=".support.LoadingSpinner" />
         <activity android:name=".activities.ActivityUserAccount" />
         <activity android:name=".payment_controller.ActivityScanner" />
+        <activity android:name=".activities.ActivityTopUp" />
 
         <uses-library android:name="android.test.runner"
             android:required="false" />

@@ -63,4 +63,9 @@
         app:layout_constraintLeft_toLeftOf="parent"
         layout="@layout/_general_loading_anim"/>
 
+    <include
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        layout="@layout/_general_checkmark_anim"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
