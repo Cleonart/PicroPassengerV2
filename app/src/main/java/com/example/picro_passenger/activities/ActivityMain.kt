@@ -1,17 +1,30 @@
 package com.example.picro_passenger.activities
 
+import android.R.attr.mode
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.picro_passenger.ActivitySplash
+import com.example.picro_passenger.Dialog.BottomSheetPassengerQuantity
+import com.example.picro_passenger.Dialog.BottomSheetPassengerSize
+import com.example.picro_passenger.Dialog.DialogLoading
 import com.example.picro_passenger.R
 import com.example.picro_passenger.cloud_functions.CloudFunctions
 import com.example.picro_passenger.payment_controller.ActivityScanner
+import com.google.firebase.firestore.FirebaseFirestore
 
-class ActivityMain : AppCompatActivity(){
 
+class ActivityMain : AppCompatActivity() {
+
+    lateinit var store : FirebaseFirestore
+    lateinit var bottomSheet : BottomSheetPassengerQuantity
+
+    private lateinit var mainUserBalanceLabel : TextView
     private lateinit var toUserAccount : LinearLayout
     private lateinit var toTopUp : ConstraintLayout
     private lateinit var toTransfer : ConstraintLayout
@@ -21,6 +34,20 @@ class ActivityMain : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activities_main)
         supportActionBar!!.hide()
+
+        //val loading : DialogLoading = DialogLoading()
+        //loading.show(this)
+
+        //bottomSheet = BottomSheetPassengerQuantity()
+        //bottomSheet.setPaymentQuantity(object : BottomSheetPassengerQuantity.PassengerQuantity{
+        //    override fun countQuantity(qty: Int) {
+        //        Log.i("Data", qty.toString())
+        //    }
+        //})
+        //bottomSheet.show(this)
+
+        store = FirebaseFirestore.getInstance()
+        mainUserBalanceLabel = findViewById(R.id.main_user_balance_label)
 
         // initialize payment button
         initPayButton()
@@ -34,6 +61,9 @@ class ActivityMain : AppCompatActivity(){
             finish()
             startActivity(intent_to)
         }
+
+        // get realtime user balance
+        updateUserData()
 
         // navigation
         navigationOnMain()
@@ -72,4 +102,16 @@ class ActivityMain : AppCompatActivity(){
 
 
     }
+
+    private fun updateUserData(){
+        val userData = store.document("picro_users/" + CloudFunctions.GetUserId())
+        userData.addSnapshotListener { snapshot, e ->
+            if(snapshot!!.exists()){
+                val userbalance = snapshot.get("user_balance").toString()
+                mainUserBalanceLabel.text = CloudFunctions.Currency(userbalance.toDouble())
+            }
+        }
+
+    }
+
 }

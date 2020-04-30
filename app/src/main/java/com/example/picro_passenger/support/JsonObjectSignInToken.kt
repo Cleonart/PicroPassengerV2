@@ -6,4 +6,5 @@ class JsonObjectSignInToken {
     var status: String? = null
 
     var token: String? = null
+
 }

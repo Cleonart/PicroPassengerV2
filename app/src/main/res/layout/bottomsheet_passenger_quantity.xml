@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="30dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- title -->
+        <TextView
+            android:layout_marginBottom="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bayarin?"
+            android:fontFamily="@font/gilroybold"
+            android:textColor="@color/dark"
+            android:textSize="@dimen/bottomSheet_Heading"/>
+
+        <!-- pay for 4 -->
+        <LinearLayout
+            android:id="@+id/BottomSheet_PayForFour"
+            android:layout_marginTop="@dimen/bottomSheet_Element_MarginTop"
+            android:layout_marginBottom="@dimen/bottomSheet_Element_MarginBottom"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bayar Berempat?"
+                android:fontFamily="@font/gilroybold"
+                android:textColor="@color/dark"
+                android:textSize="@dimen/bottomSheet_SubHeading"/>
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bayarin mikro untuk 4 orang"
+                android:fontFamily="@font/gilroyregular"
+                android:textColor="@color/dark"
+                android:alpha="0.6"
+                android:textSize="@dimen/bottomSheet_Body" />
+
+        </LinearLayout>
+
+        <!-- pay for 3 -->
+        <LinearLayout
+            android:id="@+id/BottomSheet_PayForThree"
+            android:layout_marginTop="@dimen/bottomSheet_Element_MarginTop"
+            android:layout_marginBottom="@dimen/bottomSheet_Element_MarginBottom"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bayar Bertiga?"
+                android:fontFamily="@font/gilroybold"
+                android:textColor="@color/dark"
+                android:textSize="@dimen/bottomSheet_SubHeading"/>
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bayarin mikro untuk 3 orang"
+                android:fontFamily="@font/gilroyregular"
+                android:textColor="@color/dark"
+                android:alpha="0.6"
+                android:textSize="@dimen/bottomSheet_Body" />
+
+        </LinearLayout>
+
+        <!-- pay for 2 -->
+        <LinearLayout
+            android:id="@+id/BottomSheet_PayForTwo"
+            android:layout_marginTop="@dimen/bottomSheet_Element_MarginTop"
+            android:layout_marginBottom="@dimen/bottomSheet_Element_MarginBottom"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bayar Berdua?"
+                android:fontFamily="@font/gilroybold"
+                android:textColor="@color/dark"
+                android:textSize="@dimen/bottomSheet_SubHeading"/>
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bayarin mikro untuk 2 orang"
+                android:fontFamily="@font/gilroyregular"
+                android:textColor="@color/dark"
+                android:alpha="0.6"
+                android:textSize="@dimen/bottomSheet_Body" />
+
+        </LinearLayout>
+
+        <!-- pay for 1 -->
+        <LinearLayout
+            android:id="@+id/BottomSheet_PayForOne"
+            android:layout_marginTop="@dimen/bottomSheet_Element_MarginTop"
+            android:layout_marginBottom="@dimen/bottomSheet_Element_MarginBottom"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bayar Sendiri?"
+                android:fontFamily="@font/gilroybold"
+                android:textColor="@color/dark"
+                android:textSize="@dimen/bottomSheet_SubHeading"/>
+
+            <TextView
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bayar mikro hanya untuk saya sendiri"
+                android:fontFamily="@font/gilroyregular"
+                android:textColor="@color/dark"
+                android:alpha="0.6"
+                android:textSize="@dimen/bottomSheet_Body" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

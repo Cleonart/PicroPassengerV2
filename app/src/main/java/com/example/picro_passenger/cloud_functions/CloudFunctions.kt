@@ -1,40 +1,46 @@
 package com.example.picro_passenger.cloud_functions
 
-import android.content.Intent
 import android.util.Log
-import com.example.picro_passenger.activities.ActivityMain
-import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.functions.FirebaseFunctions
-import com.google.firebase.functions.HttpsCallableResult
+import java.text.NumberFormat
+import java.util.*
 
 object CloudFunctions{
 
-    lateinit var auth: FirebaseAuth
+    private var auth: FirebaseAuth? = null
 
-    fun SignUp() {
-
+    fun FirebaseAuthInstance() : FirebaseAuth?{
+        auth = FirebaseAuth.getInstance()
+        return auth
     }
 
     // sign out method
     fun SignOut(){
-        auth = FirebaseAuth.getInstance()
-        auth.signOut()
+        FirebaseAuthInstance()?.signOut()
     }
 
     // validate token
     fun ValidateUserSignInToken() : Boolean{
-        auth = FirebaseAuth.getInstance()
-        val currentUser = auth.currentUser ?: return false
+        val currentUser = FirebaseAuthInstance()?.currentUser ?: return false
         return true
     }
 
     fun GetUserId() : String{
-        auth = FirebaseAuth.getInstance()
-        val currentUser = auth.currentUser
+        val currentUser = FirebaseAuthInstance()?.currentUser
         val userId = currentUser!!.uid
         Log.d("USER", userId)
         return userId
+    }
+
+    // currency formatting
+    fun Currency(balance:Double) : String{
+        val localeId = Locale("in", "ID")
+        val toIdCurrency : NumberFormat = NumberFormat.getCurrencyInstance(localeId)
+        return toIdCurrency.format(balance).toString()
+    }
+
+    // 10 digit token regex
+    fun TokenRegex(token:String):String{
+        return token.replace(Regex("(\\d{3})(\\d{3})(\\d{2})(\\d{2})"), "$1 $2 $3 $4")
     }
 }

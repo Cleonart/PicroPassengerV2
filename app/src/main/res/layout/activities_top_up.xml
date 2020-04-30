@@ -5,6 +5,13 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:src="@drawable/bottom_drawable"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -20,6 +27,7 @@
 
             <!-- back button -->
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/backButton"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:background="@drawable/round"
@@ -54,49 +62,57 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!-- TOP UP VALUE -->
-        <me.abhinay.input.CurrencyEditText
-            android:id="@+id/etInput"
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:hint="@string/default_nominal"
-            android:paddingBottom="20dp"
-            android:inputType="number"
-            android:textSize="35sp"
+            android:id="@+id/qrCode"
+            />
+
+        <!-- TOKEN -->
+        <TextView
+            android:id="@+id/token_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-6dp"
+            android:layout_marginBottom="6dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:text="103 049 03 91"
+            android:textColor="@color/colorPrimary"
+            android:alpha="1"
+            android:textSize="28sp"
+            android:lineSpacingExtra="6dp"
             app:fontFamily="@font/gilroybold"
-            android:textAlignment="textEnd"
-            android:gravity="end" />
+            android:textAlignment="center"
+            android:gravity="center" />
 
         <!-- REMINDER LABEL -->
         <TextView
             android:id="@+id/reminder_label"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="@string/reminder_label"
-            android:textColor="@color/danger"
-            android:textSize="12sp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:text="Anda dapat melakukan top up dengan menunjukan kode QR ini pada agen PICRO dekat anda"
+            android:textColor="@color/dark"
+            android:alpha="0.5"
+            android:textSize="13sp"
+            android:lineSpacingExtra="6dp"
             app:fontFamily="@font/gilroybold"
-            android:textAlignment="textEnd"
-            app:layout_constraintTop_toBottomOf="@id/etInput"
-            android:gravity="end" />
+            android:textAlignment="center"
+            android:gravity="center" />
 
     </LinearLayout>
 
-    <Button
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:id="@+id/topup_confirm"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="KONFIRMASI"
-        android:textSize="14sp"
-        android:textColor="#FFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginBottom="25dp"
-        android:background="@drawable/rounded_menu_2"
-        android:fontFamily="@font/gilroybold" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

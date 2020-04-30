@@ -25,7 +25,6 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.PermissionListener
 import me.dm7.barcodescanner.zxing.ZXingScannerView
 
-
 class ActivityScanner : AppCompatActivity(), ZXingScannerView.ResultHandler {
 
     lateinit var functions: FirebaseFunctions
@@ -43,13 +42,24 @@ class ActivityScanner : AppCompatActivity(), ZXingScannerView.ResultHandler {
         setContentView(R.layout._general_activity_scanner)
         supportActionBar!!.hide()
 
-        confirmation = findViewById(R.id.confirmation)
-        confirmation.visibility = View.GONE  // hide the confirmation
-        animation_view_confirmation = findViewById<LottieAnimationView>(R.id.animation_view_confirmation)
-        lottie_animation_text = findViewById(R.id.lottie_animation_text)
+        // initialize all element
+        elementInit()
 
-        spinner = findViewById(R.id.loading_spinner)
-        spinner.visibility = View.GONE // hide the spinner
+        // permission handler
+        permissionHandler()
+    }
+
+    private fun elementInit(){
+
+        // animation initialisation
+        confirmation = findViewById(R.id.confirmation)
+        confirmation.visibility = View.GONE                                                                   // hide the confirmation, only once
+        animation_view_confirmation = findViewById<LottieAnimationView>(R.id.animation_view_confirmation)     // lottie animation component
+        lottie_animation_text = findViewById(R.id.lottie_animation_text)                                      // label for payment status (Pembayaran Berhasil atau Gagal)
+
+        // spinner
+        spinner = findViewById(R.id.loading_spinner)                                                          // initialize spinner
+        spinner.visibility = View.GONE                                                                        // hide the spinner, only once
 
         // back button
         backButton = findViewById(R.id.backButton)
@@ -57,10 +67,8 @@ class ActivityScanner : AppCompatActivity(), ZXingScannerView.ResultHandler {
             finish()
         }
 
+        // initialize barcode scanner component Zxing
         mScannerView = findViewById<ZXingScannerView>(R.id.rxscan)
-
-        // permission handler
-        permissionHandler()
     }
 
     private fun permissionHandler(){
@@ -91,19 +99,17 @@ class ActivityScanner : AppCompatActivity(), ZXingScannerView.ResultHandler {
 
     override fun handleResult(rawResult: Result) {
         spinner.visibility = View.VISIBLE
-        val senderId = CloudFunctions.GetUserId()
+        val senderId= CloudFunctions.GetUserId()
         val receiverId = rawResult.text
         val amount = 4000
         pay(senderId, receiverId, 4000)
-        //TODO implement the cloud functions for payment in this function
-
     }
 
-    fun pay(senderId:String, receiverId:String, amount:Int){
+    private fun pay(senderId:String, receiverId:String, amount:Int){
 
         // dirubah menjadi object
         val data = hashMapOf("senderId" to senderId,
-                                                    "receiverId" to receiverId)
+                                                   "receiverId" to receiverId)
 
         // inisialisasi fungsi firebase
         functions = FirebaseFunctions.getInstance()
@@ -111,36 +117,38 @@ class ActivityScanner : AppCompatActivity(), ZXingScannerView.ResultHandler {
                  .call(data)
                  .addOnFailureListener{
                      spinner.visibility = View.GONE // hide the spinner
-                     Toast.makeText(baseContext, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
+                     Toast.makeText(this, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
                  }
                 .addOnSuccessListener {
                     val resultData = Gson().toJson(it.data).toString()
                     val response = Gson().fromJson(resultData, JsonObjectPaymentConfirmation::class.java)
                     val errorCode = response.error_code
-                    spinner.visibility = View.GONE            // hide the spinner
-                    confirmation.visibility = View.VISIBLE    // show the confirmation component
+                    val errorMsg = response.error_msg
+                    spinner.visibility = View.GONE                 // hide the spinner
+                    confirmation.visibility = View.VISIBLE         // show the confirmation component
                     Log.d("Payment", errorCode.toString())
 
                     when (errorCode) {
                         "RECEIVER_NOT_FOUND" -> {
                             lottie_animation_text.text = "Kode QR tidak valid"
-                            animation_view_confirmation!!.setAnimation(R.raw.loading_spinner)
+                            animation_view_confirmation!!.setAnimation(R.raw.failed)
                         }
                         "SENDER_BALANCE_NOT_ENOUGH_FOR_TRANSACTION" -> {
-                            lottie_animation_text.text = "Saldo anda tidak cukup"
-                            //animation_view_confirmation.setAnimation(R.raw.failed)
+                            val errorText = "Saldo anda tidak cukup\n" + errorMsg
+                            lottie_animation_text.text = errorText
+                            animation_view_confirmation!!.setAnimation(R.raw.failed)
                         }
                         "PAYMENT SUCCESSFULL" -> {
                             lottie_animation_text.text = "Pembayaran Berhasil"
-                            //animation_view_confirmation.setAnimation(R.raw.success)
+                            animation_view_confirmation!!.setAnimation(R.raw.success_2)
                         }
                     }
 
                     animation_view_confirmation!!.playAnimation()
 
                     // delay before going out
-                    //Handler().postDelayed(
-                     //   { Log.i("tag", "This'll run 1000 milliseconds later") },1200)
+                    Handler().postDelayed(
+                        { finish() },3200)
 
                 }
     }

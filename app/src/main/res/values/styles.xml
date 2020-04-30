@@ -25,5 +25,11 @@
     <dimen name="margin_between_label_to_input">16dp</dimen>
     <dimen name="splash_button_padding">9dp</dimen>
 
+    <!-- bottom sheet -->
+    <dimen name="bottomSheet_Heading">22sp</dimen>
+    <dimen name="bottomSheet_SubHeading">16sp</dimen>
+    <dimen name="bottomSheet_Body">13sp</dimen>
+    <dimen name="bottomSheet_Element_MarginTop">16sp</dimen>
+    <dimen name="bottomSheet_Element_MarginBottom">16sp</dimen>
 
 </resources>
