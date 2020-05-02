@@ -29,7 +29,7 @@ class BottomSheetPassengerQuantity {
     }
 
     fun show(context: Context) : Dialog?{
-        return show(context, false, null)
+        return show(context, true, null)
     }
 
     // show the bottom sheet modal
@@ -45,6 +45,7 @@ class BottomSheetPassengerQuantity {
         // dialog constructor
         dialog = BottomSheetDialog(context)
         dialog!!.setContentView(view)
+        dialog!!.setCanceledOnTouchOutside(true)
         dialog!!.setCancelable(cancelable)
         dialog!!.setOnCancelListener(cancelListener)
         dialog!!.show()
@@ -61,33 +62,37 @@ class BottomSheetPassengerQuantity {
 
         // pay for one
         BottomSheet_PayForOne.setOnClickListener {
-            passengerQuantity?.countQuantity(1)
+            passengerQuantity?.countQuantity(1, "Bayar sendiri")
             dialog!!.dismiss()
         }
 
         // pay for two
         BottomSheet_PayForTwo.setOnClickListener {
-            passengerQuantity?.countQuantity(2)
+            passengerQuantity?.countQuantity(2, "Bayar berdua")
             dialog!!.dismiss()
         }
 
         // pay for three
         BottomSheet_PayForThree.setOnClickListener {
-            passengerQuantity?.countQuantity(3)
+            passengerQuantity?.countQuantity(3, "Bayar bertiga")
             dialog!!.dismiss()
         }
 
         // pay for four
         BottomSheet_PayForFour.setOnClickListener {
-            passengerQuantity?.countQuantity(4)
+            passengerQuantity?.countQuantity(4, "Bayar berempat")
             dialog!!.dismiss()
         }
 
     }
 
+    fun getDialog() : Dialog?{
+        return dialog
+    }
+
     // inteface for bottom sheet
     interface PassengerQuantity{
-        fun countQuantity(qty : Int)
+        fun countQuantity(qty : Int, msg : String)
     }
 
 }

@@ -1,4 +1,4 @@
-package com.example.picro_passenger.cloud_functions
+package com.example.picro_passenger.CloudFunctions
 
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
@@ -9,22 +9,36 @@ object CloudFunctions{
 
     private var auth: FirebaseAuth? = null
 
-    fun FirebaseAuthInstance() : FirebaseAuth?{
+    private fun FirebaseAuthInstance() : FirebaseAuth?{
         auth = FirebaseAuth.getInstance()
         return auth
     }
 
-    // sign out method
+    /**
+     * Mengeluarkan pengguna dari aplikasi
+     */
     fun SignOut(){
         FirebaseAuthInstance()?.signOut()
     }
 
-    // validate token
+    /**
+     * ValidateUserSignInToken()
+     *
+     * Melakukan validasi token
+     * @return true : jika token ditemukan
+     *         false : jika token tidak ditemukan
+     */
     fun ValidateUserSignInToken() : Boolean{
         val currentUser = FirebaseAuthInstance()?.currentUser ?: return false
         return true
     }
 
+     /**
+     * GetUserId()
+     *
+     * Mengambil id dari user yang sedang login saat ini
+     * @return String : userId
+     */
     fun GetUserId() : String{
         val currentUser = FirebaseAuthInstance()?.currentUser
         val userId = currentUser!!.uid
@@ -32,14 +46,26 @@ object CloudFunctions{
         return userId
     }
 
-    // currency formatting
-    fun Currency(balance:Double) : String{
+    /**
+     * Currency(INT OR DOUBLE)
+     *
+     * Mengubah format ke dalam bentuk Rupiah
+     * @param balance : Double - Jumlah uang yang tersisa
+     * @return String : Ex. Rp20.000
+     */
+    fun Currency(balance: Double) : String{
         val localeId = Locale("in", "ID")
         val toIdCurrency : NumberFormat = NumberFormat.getCurrencyInstance(localeId)
         return toIdCurrency.format(balance).toString()
     }
 
-    // 10 digit token regex
+    /**
+     * TokenRegex(token:String)
+     *
+     * Fungsi untuk melakukan "generate" 10 digit token pembayaran
+     * @param token : 10 digit string token
+     * @return String : 10 digit token dengan format - XXX XXX XX XX
+     */
     fun TokenRegex(token:String):String{
         return token.replace(Regex("(\\d{3})(\\d{3})(\\d{2})(\\d{2})"), "$1 $2 $3 $4")
     }

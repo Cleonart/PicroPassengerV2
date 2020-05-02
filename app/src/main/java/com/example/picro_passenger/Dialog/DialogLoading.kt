@@ -6,6 +6,8 @@ import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
+import android.view.Window
+import android.view.WindowManager
 
 class DialogLoading {
 
@@ -23,8 +25,9 @@ class DialogLoading {
         val inflator = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflator.inflate(com.example.picro_passenger.R.layout._general_loading_anim, null)
 
-        dialog = Dialog(context, android.R.style.Theme_Light_NoTitleBar_Fullscreen)
+        dialog = Dialog(context, android.R.style.Theme_DeviceDefault_NoActionBar_Fullscreen)
         dialog!!.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog!!.window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         dialog!!.setContentView(view)
         dialog!!.setCancelable(cancelable)
         dialog!!.setOnCancelListener(cancelListener)

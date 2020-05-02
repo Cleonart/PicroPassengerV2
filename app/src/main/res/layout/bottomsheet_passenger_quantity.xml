@@ -113,7 +113,7 @@
         <LinearLayout
             android:id="@+id/BottomSheet_PayForOne"
             android:layout_marginTop="@dimen/bottomSheet_Element_MarginTop"
-            android:layout_marginBottom="@dimen/bottomSheet_Element_MarginBottom"
+            android:layout_marginBottom="40dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

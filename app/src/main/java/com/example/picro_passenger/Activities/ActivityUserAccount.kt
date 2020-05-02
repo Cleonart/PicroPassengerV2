@@ -1,15 +1,14 @@
-package com.example.picro_passenger.activities
+package com.example.picro_passenger.Activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.picro_passenger.ActivitySplash
 import com.example.picro_passenger.R
-import com.example.picro_passenger.cloud_functions.CloudFunctions
+import com.example.picro_passenger.CloudFunctions.CloudFunctions
 
 class ActivityUserAccount : AppCompatActivity(){
 

@@ -3,7 +3,7 @@ package com.example.picro_passenger
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.example.picro_passenger.cloud_functions.CloudFunctions
+import com.example.picro_passenger.CloudFunctions.CloudFunctions
 
 class MainActivity : AppCompatActivity() {
 

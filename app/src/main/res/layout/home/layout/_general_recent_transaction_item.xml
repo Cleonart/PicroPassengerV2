@@ -6,28 +6,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_marginTop="10dp"
-    android:layout_marginLeft="14.5dp"
-    android:layout_marginRight="14.5dp"
     android:id="@+id/container_layout">
 
          <TextView
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:fontFamily="@font/gilroybold"
-            android:id="@+id/tv_amount"
+             android:id="@+id/user_activity_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Rp. 20.000"
             app:layout_constraintRight_toRightOf="parent"/>
 
         <ImageView
-            android:id="@+id/image_row"
+            android:id="@+id/user_activity_image"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/mikro"/>
+            android:src="@drawable/top_up_icon"/>
 
         <LinearLayout
             android:id="@+id/container_text"
@@ -35,17 +33,17 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:orientation="vertical"
-            app:layout_constraintLeft_toRightOf="@id/image_row"
+            app:layout_constraintLeft_toRightOf="@id/user_activity_image"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent">
 
             <TextView
                 android:textColor="#000"
                 android:fontFamily="@font/gilroybold"
-                android:id="@+id/tv_id"
+                android:id="@+id/user_activity_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:textStyle="bold"
                 android:layout_marginBottom="5dp"
                 tools:text="PAYMENT20190101021"/>
@@ -53,7 +51,7 @@
             <TextView
                 android:textSize="12sp"
                 android:textColor="#000"
-                android:id="@+id/tv_date"
+                android:id="@+id/user_activity_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="2"

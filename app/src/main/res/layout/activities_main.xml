@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="false"
-    tools:context=".activities.ActivityMain"
+    tools:context=".Activities.ActivityMain"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="0dp">
 
@@ -246,7 +245,7 @@
                     android:textSize="@dimen/activity_main_feature_icon_title_size" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_record"
+                    android:id="@+id/rvUserActivity"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     tools:listitem="@layout/_general_recent_transaction_item"

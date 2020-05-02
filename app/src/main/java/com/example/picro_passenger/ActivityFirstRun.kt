@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.picro_passenger.activities.ActivityMain
-import com.example.picro_passenger.cloud_functions.CloudFunctions
+import com.example.picro_passenger.Activities.ActivityMain
+import com.example.picro_passenger.CloudFunctions.CloudFunctions
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse

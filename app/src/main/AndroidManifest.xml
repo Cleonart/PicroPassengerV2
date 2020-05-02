@@ -26,7 +26,7 @@
         <activity android:name=".stored_data_controller.StoredDataHandler" />
         <activity android:name=".MainActivity" />
         <activity android:name=".ActivitySplash" />
-        <activity android:name=".activities.ActivityMain">
+        <activity android:name=".Activities.ActivityMain">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.DEFAULT"/>
@@ -35,10 +35,9 @@
         <activity android:name=".preuse_activities.ActivitySignIn" />
         <activity android:name=".preuse_activities.ActivitySignUp" />
         <activity android:name=".support.SupportVerifyCard" />
-        <activity android:name=".support.LoadingSpinner" />
-        <activity android:name=".activities.ActivityUserAccount" />
+        <activity android:name=".Activities.ActivityUserAccount" />
         <activity android:name=".payment_controller.ActivityScanner" />
-        <activity android:name=".activities.ActivityTopUp" />
+        <activity android:name=".Activities.ActivityTopUp" />
 
         <uses-library android:name="android.test.runner"
             android:required="false" />

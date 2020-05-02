@@ -3,19 +3,17 @@ package com.example.picro_passenger.payment_controller
 import android.Manifest
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
-import android.view.View
+import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
-import com.airbnb.lottie.LottieAnimationView
+import com.example.picro_passenger.Dialog.BottomSheetPassengerQuantity
+import com.example.picro_passenger.Dialog.DialogState
 import com.example.picro_passenger.R
-import com.example.picro_passenger.cloud_functions.CloudFunctions
-import com.example.picro_passenger.support.JsonObjectPaymentConfirmation
+import com.example.picro_passenger.CloudFunctions.CloudFunctions
+import com.example.picro_passenger.CloudFunctions.PaymentHandler
 import com.google.firebase.functions.FirebaseFunctions
-import com.google.gson.Gson
 import com.google.zxing.Result
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
@@ -28,14 +26,15 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView
 class ActivityScanner : AppCompatActivity(), ZXingScannerView.ResultHandler {
 
     lateinit var functions: FirebaseFunctions
-    private var mScannerView: ZXingScannerView? = null
     lateinit var backButton : RelativeLayout
-    lateinit var spinner : ConstraintLayout
 
-    // animation
-    lateinit var confirmation : ConstraintLayout
-    private var animation_view_confirmation : LottieAnimationView? = null
-    lateinit var lottie_animation_text : TextView
+    lateinit var Scanner_PassengerQuantity_Container : LinearLayout
+    lateinit var Scanner_PassengerQuantity_TextView : TextView
+
+    private var mScannerView: ZXingScannerView? = null
+    private var state : DialogState? = null
+    private var amount : Int = 1
+    private var bottomSheet : BottomSheetPassengerQuantity? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,24 +50,32 @@ class ActivityScanner : AppCompatActivity(), ZXingScannerView.ResultHandler {
 
     private fun elementInit(){
 
-        // animation initialisation
-        confirmation = findViewById(R.id.confirmation)
-        confirmation.visibility = View.GONE                                                                   // hide the confirmation, only once
-        animation_view_confirmation = findViewById<LottieAnimationView>(R.id.animation_view_confirmation)     // lottie animation component
-        lottie_animation_text = findViewById(R.id.lottie_animation_text)                                      // label for payment status (Pembayaran Berhasil atau Gagal)
-
-        // spinner
-        spinner = findViewById(R.id.loading_spinner)                                                          // initialize spinner
-        spinner.visibility = View.GONE                                                                        // hide the spinner, only once
-
         // back button
         backButton = findViewById(R.id.backButton)
         backButton.setOnClickListener {
             finish()
         }
 
-        // initialize barcode scanner component Zxing
+        // text view
+        Scanner_PassengerQuantity_TextView = findViewById(R.id.Scanner_PassengerQuantity_TextView)
+        Scanner_PassengerQuantity_TextView.text = "Bayar sendiri"
+
+        bottomSheet = BottomSheetPassengerQuantity()
+        bottomSheet?.setPaymentQuantity(object : BottomSheetPassengerQuantity.PassengerQuantity{
+            override fun countQuantity(qty: Int, msg: String) {
+                Scanner_PassengerQuantity_TextView.text = msg
+                amount = qty
+            }
+        })
+
+        Scanner_PassengerQuantity_Container = findViewById(R.id.Scanner_PassengerQuantity_Container)
+        Scanner_PassengerQuantity_Container.setOnClickListener {
+            bottomSheet?.show(this@ActivityScanner)
+        }
+
+        // initialize barcode scanner component Zxing and dialog state class
         mScannerView = findViewById<ZXingScannerView>(R.id.rxscan)
+        state = DialogState()
     }
 
     private fun permissionHandler(){
@@ -98,59 +105,39 @@ class ActivityScanner : AppCompatActivity(), ZXingScannerView.ResultHandler {
     }
 
     override fun handleResult(rawResult: Result) {
-        spinner.visibility = View.VISIBLE
         val senderId= CloudFunctions.GetUserId()
         val receiverId = rawResult.text
-        val amount = 4000
-        pay(senderId, receiverId, 4000)
+        pay(senderId, receiverId)
     }
 
-    private fun pay(senderId:String, receiverId:String, amount:Int){
+    private fun pay(senderId:String, receiverId:String){
+        val paymentHandler : PaymentHandler = PaymentHandler()
+        paymentHandler.setPaymentStatus(object : PaymentHandler.PaymentStatus{
+            override fun PaymentHandlerStatus(StatusCode: String, StatusMsg: String) {
 
-        // dirubah menjadi object
-        val data = hashMapOf("senderId" to senderId,
-                                                   "receiverId" to receiverId)
-
-        // inisialisasi fungsi firebase
-        functions = FirebaseFunctions.getInstance()
-        functions.getHttpsCallable("PaymentCloud")
-                 .call(data)
-                 .addOnFailureListener{
-                     spinner.visibility = View.GONE // hide the spinner
-                     Toast.makeText(this, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
-                 }
-                .addOnSuccessListener {
-                    val resultData = Gson().toJson(it.data).toString()
-                    val response = Gson().fromJson(resultData, JsonObjectPaymentConfirmation::class.java)
-                    val errorCode = response.error_code
-                    val errorMsg = response.error_msg
-                    spinner.visibility = View.GONE                 // hide the spinner
-                    confirmation.visibility = View.VISIBLE         // show the confirmation component
-                    Log.d("Payment", errorCode.toString())
-
-                    when (errorCode) {
-                        "RECEIVER_NOT_FOUND" -> {
-                            lottie_animation_text.text = "Kode QR tidak valid"
-                            animation_view_confirmation!!.setAnimation(R.raw.failed)
-                        }
-                        "SENDER_BALANCE_NOT_ENOUGH_FOR_TRANSACTION" -> {
-                            val errorText = "Saldo anda tidak cukup\n" + errorMsg
-                            lottie_animation_text.text = errorText
-                            animation_view_confirmation!!.setAnimation(R.raw.failed)
-                        }
-                        "PAYMENT SUCCESSFULL" -> {
-                            lottie_animation_text.text = "Pembayaran Berhasil"
-                            animation_view_confirmation!!.setAnimation(R.raw.success_2)
-                        }
+                when (StatusCode) {
+                    "CONNECTION_PROBLEM" -> {
+                        state!!.showFailed(this@ActivityScanner, "Koneksi Bermasalah")
                     }
-
-                    animation_view_confirmation!!.playAnimation()
-
-                    // delay before going out
-                    Handler().postDelayed(
-                        { finish() },3200)
-
+                    "RECEIVER_NOT_FOUND" -> {
+                        state!!.showFailed(this@ActivityScanner, "Kode QR tidak valid")
+                    }
+                    "SENDER_BALANCE_NOT_ENOUGH_FOR_TRANSACTION" -> {
+                        val errorText = "Saldo anda tidak cukup\n" + StatusMsg
+                        state!!.showFailed(this@ActivityScanner, errorText)
+                    }
+                    "PAYMENT SUCCESSFULL" -> {
+                        state!!.showSuccess(this@ActivityScanner, "Pembayaran Berhasil")
+                    }
                 }
+
+                Handler().postDelayed({
+                    finish()
+                },3200)
+            }
+        })
+        paymentHandler.MakePayment(this, senderId, receiverId, amount)
     }
+
 
 }
