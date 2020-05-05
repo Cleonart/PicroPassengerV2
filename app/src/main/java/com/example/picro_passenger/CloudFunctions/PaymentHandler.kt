@@ -2,7 +2,7 @@ package com.example.picro_passenger.CloudFunctions
 
 import android.content.Context
 import com.example.picro_passenger.Dialog.DialogLoading
-import com.example.picro_passenger.support.JsonObjectPaymentConfirmation
+import com.example.picro_passenger.Support.JsonObjectPaymentConfirmation
 import com.google.firebase.functions.FirebaseFunctions
 import com.google.gson.Gson
 

@@ -15,6 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:screenOrientation="portrait" >
+
         <!-- START -->
         <activity android:name=".ActivityFirstRun" >
             <intent-filter>
@@ -34,10 +35,12 @@
         </activity>
         <activity android:name=".preuse_activities.ActivitySignIn" />
         <activity android:name=".preuse_activities.ActivitySignUp" />
-        <activity android:name=".support.SupportVerifyCard" />
+        <activity android:name=".Support.SupportVerifyCard" />
         <activity android:name=".Activities.ActivityUserAccount" />
         <activity android:name=".payment_controller.ActivityScanner" />
         <activity android:name=".Activities.ActivityTopUp" />
+        <activity android:name=".ActivityDriver.DriverMainActivity" />
+        <activity android:name=".ActivityDriver.DriverListActivity" />
 
         <uses-library android:name="android.test.runner"
             android:required="false" />

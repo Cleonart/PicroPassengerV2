@@ -1,6 +1,13 @@
-package com.example.picro_passenger.support
+package com.example.picro_passenger.Support
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import android.view.View
+import androidx.core.content.ContextCompat.startActivity
+import com.example.picro_passenger.Activities.ActivityTopUp
 import java.security.MessageDigest
+import kotlin.reflect.KClass
 
 /**
  * Supported algorithms on Android:
@@ -39,4 +46,6 @@ object HashUtils {
     }
 
 }
+
+
 

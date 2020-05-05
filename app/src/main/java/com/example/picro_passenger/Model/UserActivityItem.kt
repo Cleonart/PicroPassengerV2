@@ -7,5 +7,6 @@ class UserActivityItem {
     var invoice_sender: String? = null
     var invoice_receiver: String? = null
     var invoice_timestamp: String? = null
-    var invoice_datetime: String? = null
+    var invoice_date: String? = null
+    var invoice_time: String? = null
 }

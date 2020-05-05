@@ -5,7 +5,6 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    android:layout_marginTop="10dp"
     android:id="@+id/container_layout">
 
          <TextView
@@ -59,42 +58,12 @@
 
         </LinearLayout>
 
-
         <LinearLayout
             app:layout_constraintTop_toBottomOf="@id/container_text"
             android:layout_width="match_parent"
             android:layout_height="0.55dp"
             android:background="#bcbec0"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="25dp"
             android:layout_marginBottom="15dp"/>
-
-        <LinearLayout
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/container_text"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_to"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_from"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_type"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_timestamp"/>
-
-        </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

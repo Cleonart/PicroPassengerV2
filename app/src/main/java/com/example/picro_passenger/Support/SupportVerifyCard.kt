@@ -1,4 +1,4 @@
-package com.example.picro_passenger.support
+package com.example.picro_passenger.Support
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

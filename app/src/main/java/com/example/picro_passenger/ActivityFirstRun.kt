@@ -7,6 +7,7 @@ import android.os.Handler
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.picro_passenger.Activities.ActivityMain
+import com.example.picro_passenger.ActivityDriver.DriverMainActivity
 import com.example.picro_passenger.CloudFunctions.CloudFunctions
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
@@ -46,7 +47,8 @@ class ActivityFirstRun : AppCompatActivity() {
             // pergi ke menu utama
             intentControl = when {
                 CloudFunctions.ValidateUserSignInToken() -> {
-                    Intent(this,ActivityMain::class.java)
+                    //Intent(this,ActivityMain::class.java)
+                    Intent(this, DriverMainActivity::class.java)
                 }
                 // pergi ke menu splash
                 else -> {

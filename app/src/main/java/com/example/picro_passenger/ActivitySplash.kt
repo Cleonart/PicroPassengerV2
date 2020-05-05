@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.picro_passenger.Activities.ActivityMain
 import com.example.picro_passenger.CloudFunctions.CloudFunctions
 import com.example.picro_passenger.preuse_activities.ActivitySignIn
-import com.example.picro_passenger.support.SupportVerifyCard
+import com.example.picro_passenger.Support.SupportVerifyCard
 
 class ActivitySplash : AppCompatActivity(){
 

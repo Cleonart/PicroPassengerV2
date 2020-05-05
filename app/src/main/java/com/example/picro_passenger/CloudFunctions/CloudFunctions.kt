@@ -59,6 +59,20 @@ object CloudFunctions{
         return toIdCurrency.format(balance).toString()
     }
 
+    fun Percent(valueToConvert: Double, valueAtMax: Double): Float{
+        var value = ((valueToConvert/valueAtMax) * 100).toFloat()
+        if(value >= 100 || value >= 100F){
+            value = 100F
+        }
+        return value
+    }
+
+    fun ChangePercentStatus(formatManual: String, valueToConvert: Double, valueAtMax: Double): String{
+        val percent = formatManual.format(Percent(valueToConvert.toDouble(), valueAtMax.toDouble()))
+        val user_daily_revenue = "$percent%"
+        return user_daily_revenue
+    }
+
     /**
      * TokenRegex(token:String)
      *
