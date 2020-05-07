@@ -112,7 +112,6 @@ class ActivityMain : AppCompatActivity() {
                 mainUserBalanceLabel.text = CloudFunctions.Currency(userbalance.toDouble())
             }
         }
-
     }
 
     override fun onStop() {

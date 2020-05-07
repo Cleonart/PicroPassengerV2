@@ -14,6 +14,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.functions.FirebaseFunctions
 import com.google.gson.Gson
 import com.example.picro_passenger.Support.JsonObjectSignInToken
+import com.example.picro_passenger.newSupport.SharedPreferencesService
 
 // passed 5 of 5 tests
 // module on 95%
@@ -146,11 +147,14 @@ class ActivitySignIn : AppCompatActivity(){
                         auth.signInWithCustomToken(it)
                             .addOnCompleteListener { Task ->
 
+                                val userType = response.userType.toString()
+
                                 // sembunyikan loading jika loading berhasil
                                 spinner.visibility = View.GONE
 
                                 // jika token terautentikasi dengan benar
                                 if (Task.isSuccessful) {
+                                    SharedPreferencesService.PreferencesSet(baseContext, "userType", userType)
                                     Log.d("FirebaseSignIn", "signInWithCustomToken:success")
                                     finish()
                                 }
