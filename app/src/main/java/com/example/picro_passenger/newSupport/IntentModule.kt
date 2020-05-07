@@ -6,11 +6,18 @@ import android.view.View
 
 object IntentControl{
 
-    fun NavigatingTo(context: Activity, view: View, to: Class<*>){
+    fun NavigatingTo(context: Activity, view: View, to: Class<*>, finish: Boolean= false){
         view.setOnClickListener {
-            val intentTo = Intent(context, to)
-            context.startActivity(intentTo)
+            IntentNavigation(context, to, finish)
         }
+    }
+
+    fun IntentNavigation(context: Activity, to: Class<*>, finish: Boolean = false){
+        val intentTo = Intent(context, to)
+        if(finish){
+            context.finish()
+        }
+        context.startActivity(intentTo)
     }
 
     fun FinishActivity(context: Activity, view: View){

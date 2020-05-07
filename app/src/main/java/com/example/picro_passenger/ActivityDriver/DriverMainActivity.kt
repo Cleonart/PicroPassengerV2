@@ -45,8 +45,8 @@ class DriverMainActivity : AppCompatActivity() {
         DriverMain_date = findViewById(R.id.DriverMain_date)
 
         /** [NAVIGATION] Pergi ke halaman pengaturan pengguna */
-        //DriverTo_UserProfile = findViewById(R.id.DriverTo_UserAccount)
-        //IntentControl.NavigatingTo(this, DriverTo_UserProfile, ActivityUserAccount::class.java)
+        DriverTo_UserProfile = findViewById(R.id.DriverMain_UserAccount)
+        IntentControl.NavigatingTo(this, DriverTo_UserProfile, ActivityUserAccount::class.java)
 
         /** [NAVIGATION] Pergi ke halaman daftar aktivitas*/
         DriverTo_ListActivity = findViewById(R.id.DriverTo_ListActivity)
