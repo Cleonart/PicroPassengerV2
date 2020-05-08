@@ -50,6 +50,10 @@ class AdapterUserActivity internal constructor (options: FirestoreRecyclerOption
             }
         }
 
+        else if(model.invoice_type == "300"){
+
+        }
+
     }
 
     /**
@@ -69,7 +73,7 @@ class AdapterUserActivity internal constructor (options: FirestoreRecyclerOption
         holder.invoice_image.setImageResource(itemIcon)
 
         if(itemColor == "DANGER"){
-            holder.invoice_amount.setTextColor(Color.rgb(46, 204, 113))
+            holder.invoice_amount.setTextColor(Color.rgb(231, 76, 60))
             itemAmount_ = "-$itemAmount"
         }
         else if(itemColor == "SUCCESS"){

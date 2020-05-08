@@ -15,7 +15,9 @@ import com.example.picro_passenger.Dialog.BottomSheetPassengerQuantity
 import com.example.picro_passenger.Model.UserActivityItem
 import com.example.picro_passenger.R
 import com.example.picro_passenger.newSupport.IntentControl
+import com.example.picro_passenger.newSupport.SharedPreferencesService
 import com.example.picro_passenger.payment_controller.ActivityScanner
+import com.example.picro_passenger.preuse_activities.ActivityTransfer
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -28,7 +30,13 @@ class ActivityMain : AppCompatActivity() {
     lateinit var bottomSheet : BottomSheetPassengerQuantity
 
     private lateinit var mainUserBalanceLabel : TextView
+
+    /** start bottom navigation **/
     private lateinit var toUserAccount : LinearLayout
+    private lateinit var toScannerBottom : LinearLayout
+    private lateinit var toActivity : LinearLayout
+    /** end bottom navigation **/
+
     private lateinit var toTopUp : ConstraintLayout
     private lateinit var toTransfer : ConstraintLayout
     private lateinit var toScanner : LinearLayout
@@ -44,6 +52,8 @@ class ActivityMain : AppCompatActivity() {
 
         // initialize payment button
         toUserAccount = findViewById(R.id.activity_main_bottom_navigation_user)
+        toScannerBottom = findViewById(R.id.activity_main_bottom_navigation_pay)
+
         toTopUp       = findViewById(R.id.top_up_button)
         toTransfer    = findViewById(R.id.transfer_button)
         toScanner     = findViewById(R.id.activity_main_button_pay)
@@ -92,6 +102,7 @@ class ActivityMain : AppCompatActivity() {
 
         /** [NAVIGATION] Pergi ke halaman scanner */
         IntentControl.NavigatingTo(this, toScanner, ActivityScanner::class.java)
+        IntentControl.NavigatingTo(this, toScannerBottom, ActivityScanner::class.java)
 
         /** [NAVIGATION] Pergi ke halaman detail pengguna */
         IntentControl.NavigatingTo(this, toUserAccount, ActivityUserAccount::class.java)
@@ -100,7 +111,7 @@ class ActivityMain : AppCompatActivity() {
         IntentControl.NavigatingTo(this, toTopUp, ActivityTopUp::class.java)
 
         /** [NAVIGATION] Pergi ke halaman transfer */
-        IntentControl.NavigatingTo(this, toTopUp, ActivityTopUp::class.java)
+        IntentControl.NavigatingTo(this, toTransfer, ActivityTransfer::class.java)
 
     }
 
@@ -109,6 +120,7 @@ class ActivityMain : AppCompatActivity() {
         userData.addSnapshotListener { snapshot, e ->
             if(snapshot!!.exists()){
                 val userbalance = snapshot.get("user_balance").toString()
+                SharedPreferencesService.PreferencesSet(baseContext, "user_balance", userbalance)
                 mainUserBalanceLabel.text = CloudFunctions.Currency(userbalance.toDouble())
             }
         }

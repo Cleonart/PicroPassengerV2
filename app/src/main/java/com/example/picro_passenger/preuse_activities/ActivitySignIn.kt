@@ -148,13 +148,14 @@ class ActivitySignIn : AppCompatActivity(){
                             .addOnCompleteListener { Task ->
 
                                 val userType = response.userType.toString()
+                                Log.d("userType", userType)
+                                SharedPreferencesService.PreferencesSet(baseContext, "userType", userType)
 
                                 // sembunyikan loading jika loading berhasil
                                 spinner.visibility = View.GONE
 
                                 // jika token terautentikasi dengan benar
                                 if (Task.isSuccessful) {
-                                    SharedPreferencesService.PreferencesSet(baseContext, "userType", userType)
                                     Log.d("FirebaseSignIn", "signInWithCustomToken:success")
                                     finish()
                                 }

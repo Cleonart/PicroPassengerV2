@@ -3,7 +3,6 @@ package com.example.picro_passenger.newSupport
 import android.content.Context
 import android.preference.PreferenceManager
 
-
 object SharedPreferencesService {
 
     fun PreferencesSet(context: Context?, fieldName: String, fieldValue: String){
@@ -13,9 +12,9 @@ object SharedPreferencesService {
         editor.apply()
     }
 
-    fun PreferencesGet(context: Context, fieldName: String): String?{
+    fun PreferencesGet(context: Context, fieldName: String): String? {
         val preferences = PreferenceManager.getDefaultSharedPreferences(context)
-        return preferences.getString(fieldName, null)
+        return preferences.getString(fieldName, "GOT_NOTHING")
     }
 
     fun PreferencesAvailable(context: Context?, fieldName: String): Boolean{

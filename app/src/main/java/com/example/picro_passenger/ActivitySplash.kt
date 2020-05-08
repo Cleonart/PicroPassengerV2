@@ -14,19 +14,16 @@ import com.example.picro_passenger.newSupport.SharedPreferencesService
 
 class ActivitySplash : AppCompatActivity(){
 
-    lateinit var intentControl : Intent
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
         supportActionBar!!.hide()
-        intentControl = Intent()
 
         val splashSignIn = findViewById<Button>(R.id.splashSignIn)
         val splashSignUp = findViewById<Button>(R.id.splashSignUp)
         val splashRegisterNewCard = findViewById<Button>(R.id.splashRegisterNewCardButton)
 
-        validateUser()
+        CloudFunctions.ValidateUserTypeActivity(baseContext, this)
 
         IntentControl.NavigatingTo(this, splashSignIn, ActivitySignIn::class.java)
         IntentControl.NavigatingTo(this, splashSignUp, SupportVerifyCard::class.java)
@@ -35,19 +32,7 @@ class ActivitySplash : AppCompatActivity(){
 
     override fun onResume() {
         super.onResume()
-        validateUser()
+        CloudFunctions.ValidateUserTypeActivity(baseContext, this)
     }
 
-    // validate if the user is already signed in
-    private fun validateUser(){
-        if(CloudFunctions.ValidateUserSignInToken()){
-            val userType = SharedPreferencesService.PreferencesGet(baseContext, "userType")
-            if(userType == "passenger" || userType == "owner"){
-                IntentControl.IntentNavigation(this, ActivityMain::class.java, true)
-            }
-            else if(userType == "driver"){
-                IntentControl.IntentNavigation(this, DriverMainActivity::class.java, true)
-            }
-        }
-    }
 }

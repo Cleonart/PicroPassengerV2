@@ -40,18 +40,7 @@ class ActivityFirstRun : AppCompatActivity() {
 
     fun validate(){
         val r = Runnable {
-            if(CloudFunctions.ValidateUserSignInToken()){
-                val userType = SharedPreferencesService.PreferencesGet(baseContext, "userType")
-                if(userType == "passenger" || userType == "owner"){
-                    IntentControl.IntentNavigation(this, ActivityMain::class.java, true)
-                }
-                else if(userType == "driver"){
-                    IntentControl.IntentNavigation(this, DriverMainActivity::class.java, true)
-                }
-                else{
-                    Intent(this,ActivitySplash::class.java)
-                }
-            }
+            CloudFunctions.ValidateUserTypeActivity(baseContext, this, true)
         }
         Handler().postDelayed(r, 400)
     }

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp">
+
+        <TextView
+            android:layout_marginTop="30dp"
+            android:textSize="20sp"
+            android:lineSpacingExtra="7dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gilroybold"
+            android:textColor="@color/colorPrimary"
+            android:text="Anda yakin akan melakukan \ntransfer dana picro?"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/corner_5_stroke"
+            android:layout_marginTop="20dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_marginBottom="5dp">
+
+            <ImageView
+                android:id="@+id/Transfer_CardImage"
+                android:layout_marginLeft="20dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:src="@drawable/picro_card"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                app:layout_constraintLeft_toRightOf="@id/Transfer_CardImage"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gilroybold"
+                    android:textColor="@color/dark"
+                    android:textSize="12sp"
+                    android:text="Saldo saya"/>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:alpha="0.5"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_arrow_downward_black_24dp"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/corner_5_stroke"
+            android:layout_marginTop="5dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_marginBottom="5dp">
+
+            <ImageView
+                android:id="@+id/Transfer_CardImage2"
+                android:layout_marginLeft="20dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:src="@drawable/picro_card"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                app:layout_constraintLeft_toRightOf="@id/Transfer_CardImage2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gilroybold"
+                    android:textColor="@color/dark"
+                    android:textSize="12sp"
+                    android:text="John Doe"/>
+
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gilroyregular"
+                    android:text="11020402"
+                    android:textSize="14sp"/>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/Transfer_TransferButton"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Transfer"
+            android:textSize="14sp"
+            android:textColor="#FFF"
+            android:layout_marginBottom="25dp"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/rounded_menu_2"
+            android:fontFamily="@font/gilroybold" />
+
+    </LinearLayout>
+    
+</LinearLayout>

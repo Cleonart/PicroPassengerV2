@@ -41,6 +41,7 @@
         <activity android:name=".Activities.ActivityTopUp" />
         <activity android:name=".ActivityDriver.DriverMainActivity" />
         <activity android:name=".ActivityDriver.DriverListActivity" />
+        <activity android:name=".preuse_activities.ActivityTransfer" />
 
         <uses-library android:name="android.test.runner"
             android:required="false" />

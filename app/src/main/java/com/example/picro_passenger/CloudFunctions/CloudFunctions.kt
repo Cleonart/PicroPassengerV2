@@ -1,6 +1,14 @@
 package com.example.picro_passenger.CloudFunctions
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.util.Log
+import com.example.picro_passenger.Activities.ActivityMain
+import com.example.picro_passenger.ActivityDriver.DriverMainActivity
+import com.example.picro_passenger.ActivitySplash
+import com.example.picro_passenger.newSupport.IntentControl
+import com.example.picro_passenger.newSupport.SharedPreferencesService
 import com.google.firebase.auth.FirebaseAuth
 import java.text.NumberFormat
 import java.util.*
@@ -82,5 +90,45 @@ object CloudFunctions{
      */
     fun TokenRegex(token:String):String{
         return token.replace(Regex("(\\d{3})(\\d{3})(\\d{2})(\\d{2})"), "$1 $2 $3 $4")
+    }
+
+    /**
+     * ValidateUserActivity
+     *
+     * fungsi untuk melakukan validasi activity dari pengguna
+     * jika pengguna bertipe pengguna penumpang atau pemilik akan diarahkan ke ActivityMain
+     * jika pengguna bertipe pengguna driver akan diarahkan ke DriverMainActivity
+     *
+     * @param BaseContextData : BaseContext dari aplikasi
+     * @param intentActivity : Activity
+     */
+    fun ValidateUserTypeActivity(BaseContextData: Context, intentActivity: Activity, firstRun: Boolean = false){
+
+        if(ValidateUserSignInToken()){
+
+            val userType = SharedPreferencesService.PreferencesGet(BaseContextData, "userType")
+            Log.d("userType", userType)
+            if(userType == "passenger" || userType == "owner"){
+                IntentControl.IntentNavigation(intentActivity, ActivityMain::class.java, true)
+            }
+
+            else if(userType == "driver"){
+                IntentControl.IntentNavigation(intentActivity, DriverMainActivity::class.java, true)
+            }
+
+            else{
+                if(firstRun){
+                    IntentControl.IntentNavigation(intentActivity, ActivitySplash::class.java, true)
+                }
+            }
+
+        }
+        else{
+            SharedPreferencesService.PreferencesSet(BaseContextData, "userType", "none")
+            if(firstRun){
+                IntentControl.IntentNavigation(intentActivity, ActivitySplash::class.java, true)
+            }
+        }
+
     }
 }
